@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'io.github.duskyrdev'
+version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    compileOnly(files("libs/HytaleServer.jar"))
+}
+
+tasks.jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveBaseName.set("HySkills")
+    archiveVersion.set(version.toString())
+}
+
+tasks.register<Copy>("deployToServer") {
+    dependsOn(tasks.jar)
+    from(tasks.jar.get().archiveFile)
+    into(file("../server/mods"))
+}
+
+test {
+    useJUnitPlatform()
+}
