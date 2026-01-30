@@ -42,6 +42,6 @@ public class HySkills extends JavaPlugin{
         getEventRegistry().register(GiveXPEvent.class, new GiveXPHandler());
         getEventRegistry().register(LevelUpEvent.class, new LevelUpHandler());
 
-        getCommandRegistry().registerCommand(new RpgCommand());
+        getCommandRegistry().registerCommand(new RPGCommand());
     }
 }
