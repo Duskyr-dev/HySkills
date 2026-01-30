@@ -27,11 +27,6 @@ tasks.jar {
     archiveVersion.set(version.toString())
 }
 
-tasks.register<Copy>("deployToServer") {
-    dependsOn(tasks.jar)
-    from(tasks.jar.get().archiveFile)
-    into(file("../server/mods"))
-}
 
 test {
     useJUnitPlatform()
